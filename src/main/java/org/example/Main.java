@@ -69,9 +69,36 @@ public class Main {
         System.out.println();
         System.out.println("-----------------------");
 
-        // Testing borrow limit
+        // Testing borrow limit and status
         BookService.borrowBook(user1, book3);
         BookService.borrowBook(user1, book4);
         BookService.borrowBook(user1, book5);
+        BookService.returnBook(user1, book6);
+
+        // Return borrowed books
+        BookService.returnBook(user1, book3);
+        BookService.returnBook(user1, book4);
+
+        System.out.println();
+        System.out.println("-----------------------");
+
+        // Get all books
+        for (Book book : BookService.getAllBooks()) {
+            System.out.println(book);
+        }
+
+        System.out.println();
+        System.out.println("-----------------------");
+
+        // Delete a book
+        BookService.deleteBook(book6);
+
+        System.out.println();
+        System.out.println("-----------------------");
+
+        // Get all books
+        for (Book book : BookService.getAllBooks()) {
+            System.out.println(book);
+        }
     }
 }
