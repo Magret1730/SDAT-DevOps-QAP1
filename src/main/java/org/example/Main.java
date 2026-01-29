@@ -17,8 +17,8 @@ public class Main {
         User user1 = UserService.createUser(name, userId, email);
         User user2 = UserService.createUser(name2, userId2, email2);
 
-        System.out.println("User 1: " + user1);
-        System.out.println("User 2: " + user2);
+        System.out.println();
+        System.out.println("-----------------------");
 
         // Creates six books
         String title1 = "To Kill a Mockingbird";
@@ -52,11 +52,26 @@ public class Main {
         Book book5 = BookService.createBook(title5, author5, isbn5);
         Book book6 = BookService.createBook(title6, author6, isbn6);
 
-        System.out.println("Book 1: " + book1);
-        System.out.println("Book 2: " + book2);
-        System.out.println("Book 3: " + book3);
-        System.out.println("Book 4: " + book4);
-        System.out.println("Book 5: " + book5);
-        System.out.println("Book 6: " + book6);
+        System.out.println();
+        System.out.println("-----------------------");
+
+        // Borrow books
+        BookService.borrowBook(user1, book1);
+        BookService.borrowBook(user2, book2);
+
+        System.out.println();
+        System.out.println("-----------------------");
+
+        // Return books
+        BookService.returnBook(user1, book1);
+        BookService.returnBook(user2, book2);
+
+        System.out.println();
+        System.out.println("-----------------------");
+
+        // Testing borrow limit
+        BookService.borrowBook(user1, book3);
+        BookService.borrowBook(user1, book4);
+        BookService.borrowBook(user1, book5);
     }
 }
