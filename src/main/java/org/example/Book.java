@@ -1,10 +1,5 @@
 package org.example;
 
-//o Features: Book issue/return, search catalog, user management.
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Book {
     public String title;
     public String author;

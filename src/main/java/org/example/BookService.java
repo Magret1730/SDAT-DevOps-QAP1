@@ -64,4 +64,21 @@ public class BookService {
     public static List<Book> getAllBooks() {
         return new ArrayList<>(books);
     }
+
+    // Search books by title or author
+    public static List<Book> searchBooks(String query) {
+        List<Book> results = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                    book.getAuthor().toLowerCase().contains(query.toLowerCase())) {
+                results.add(book);
+            }
+        }
+
+        System.out.println("Search results for \"" + query + "\":");
+        for (Book book : results) {
+            System.out.println(book);
+        }
+        return results;
+    }
 }

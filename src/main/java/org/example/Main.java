@@ -100,5 +100,12 @@ public class Main {
         for (Book book : BookService.getAllBooks()) {
             System.out.println(book);
         }
+
+        System.out.println();
+        System.out.println("-----------------------");
+
+        // Search books by title or author
+        BookService.searchBooks(book1.getTitle());
+        BookService.searchBooks(book2.getAuthor());
     }
 }

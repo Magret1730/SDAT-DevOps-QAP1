@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-
-    private static final int MAX_BORROWED_BOOKS = 5;
-
     public String name;
     public String userId;
     public String email;
