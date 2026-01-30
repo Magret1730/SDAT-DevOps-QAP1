@@ -1,5 +1,10 @@
 package org.example;
 
+import org.example.model.Book;
+import org.example.model.User;
+import org.example.service.BookService;
+import org.example.service.UserService;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {

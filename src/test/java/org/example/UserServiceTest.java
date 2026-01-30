@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.model.User;
+import org.example.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
