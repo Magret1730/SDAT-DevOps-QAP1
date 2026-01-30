@@ -3,7 +3,9 @@ package org.example;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
+        UserService userService = new UserService();
+        BookService bookService = new BookService(2); // Max borrow limit set to 5
 
         // Creates two users
         String name = "Alice Smith";
@@ -14,8 +16,11 @@ public class Main {
         String userId2 = "002";
         String email2 = "bob.johnson@example.com";
 
-        User user1 = UserService.createUser(name, userId, email);
-        User user2 = UserService.createUser(name2, userId2, email2);
+        User user1 = userService.createUser(name, userId, email);
+        User user2 = userService.createUser(name2, userId2, email2);
+
+        System.out.println("Creating user: " + user1.getName() + " (ID: " + user1.getUserId() + ", Email: " + user1.getEmail() + ")");
+        System.out.println("Creating user: " + user2.getName() + " (ID: " + user2.getUserId() + ", Email: " + user2.getEmail() + ")");
 
         System.out.println();
         System.out.println("-----------------------");
@@ -45,45 +50,52 @@ public class Main {
         String author6 = "Stuart Kaminsky";
         String isbn6 = "978-0-345-40412-5";
 
-        Book book1 = BookService.createBook(title1, author1, isbn1);
-        Book book2 = BookService.createBook(title2, author2, isbn2);
-        Book book3 = BookService.createBook(title3, author3, isbn3);
-        Book book4 = BookService.createBook(title4, author4, isbn4);
-        Book book5 = BookService.createBook(title5, author5, isbn5);
-        Book book6 = BookService.createBook(title6, author6, isbn6);
+        Book book1 = bookService.createBook(title1, author1, isbn1);
+        Book book2 = bookService.createBook(title2, author2, isbn2);
+        Book book3 = bookService.createBook(title3, author3, isbn3);
+        Book book4 = bookService.createBook(title4, author4, isbn4);
+        Book book5 = bookService.createBook(title5, author5, isbn5);
+        Book book6 = bookService.createBook(title6, author6, isbn6);
+
+        System.out.println("Creating book: " + book1.getTitle() + " by " + book1.getAuthor() + " (ISBN: " + book1.getIsbn() + ")");
+        System.out.println("Creating book: " + book2.getTitle() + " by " + book2.getAuthor() + " (ISBN: " + book2.getIsbn() + ")");
+        System.out.println("Creating book: " + book3.getTitle() + " by " + book3.getAuthor() + " (ISBN: " + book3.getIsbn() + ")");
+        System.out.println("Creating book: " + book4.getTitle() + " by " + book4.getAuthor() + " (ISBN: " + book4.getIsbn() + ")");
+        System.out.println("Creating book: " + book5.getTitle() + " by " + book5.getAuthor() + " (ISBN: " + book5.getIsbn() + ")");
+        System.out.println("Creating book: " + book6.getTitle() + " by " + book6.getAuthor() + " (ISBN: " + book6.getIsbn() + ")");
 
         System.out.println();
         System.out.println("-----------------------");
 
         // Borrow books
-        BookService.borrowBook(user1, book1);
-        BookService.borrowBook(user2, book2);
+        bookService.borrowBook(user1, book1);
+        bookService.borrowBook(user2, book2);
 
         System.out.println();
         System.out.println("-----------------------");
 
         // Return books
-        BookService.returnBook(user1, book1);
-        BookService.returnBook(user2, book2);
+        bookService.returnBook(user1, book1);
+        bookService.returnBook(user2, book2);
 
         System.out.println();
         System.out.println("-----------------------");
 
         // Testing borrow limit and status
-        BookService.borrowBook(user1, book3);
-        BookService.borrowBook(user1, book4);
-        BookService.borrowBook(user1, book5);
-        BookService.returnBook(user1, book6);
+        bookService.borrowBook(user1, book3);
+        bookService.borrowBook(user1, book4);
+        bookService.borrowBook(user1, book5);
+        bookService.returnBook(user1, book6);
 
         // Return borrowed books
-        BookService.returnBook(user1, book3);
-        BookService.returnBook(user1, book4);
+        bookService.returnBook(user1, book3);
+        bookService.returnBook(user1, book4);
 
         System.out.println();
         System.out.println("-----------------------");
 
         // Get all books
-        for (Book book : BookService.getAllBooks()) {
+        for (Book book : bookService.getAllBooks()) {
             System.out.println(book);
         }
 
@@ -91,13 +103,13 @@ public class Main {
         System.out.println("-----------------------");
 
         // Delete a book
-        BookService.deleteBook(book6);
+        bookService.deleteBook(book6);
 
         System.out.println();
         System.out.println("-----------------------");
 
         // Get all books
-        for (Book book : BookService.getAllBooks()) {
+        for (Book book : bookService.getAllBooks()) {
             System.out.println(book);
         }
 
@@ -105,7 +117,7 @@ public class Main {
         System.out.println("-----------------------");
 
         // Search books by title or author
-        BookService.searchBooks(book1.getTitle());
-        BookService.searchBooks(book2.getAuthor());
+        bookService.searchBooks(book1.getTitle());
+        bookService.searchBooks(book2.getAuthor());
     }
 }

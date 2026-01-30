@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookService {
-    private static final int MAX_BORROW_LIMIT = 2;
-    private static final List<Book> books = new ArrayList<>();
+    private final int maxBorrowLimit;
+    private final List<Book> books = new ArrayList<>();
+
+    public BookService(int maxBorrowLimit) {
+        this.maxBorrowLimit = maxBorrowLimit;
+    }
 
     // Create book
-    public static Book createBook(String title, String author, String isbn) {
-        System.out.println("Creating book: " + title + " by " + author + " (ISBN: " + isbn + ")");
+    public Book createBook(String title, String author, String isbn) {
+//        System.out.println("Creating book: " + title + " by " + author + " (ISBN: " + isbn + ")");
         Book book = new Book(title, author, isbn, true);
         books.add(book);
 
@@ -17,8 +21,8 @@ public class BookService {
     }
 
     // Borrow book
-    public static boolean borrowBook(User user, Book book) {
-        if (user.borrowedBooks.size() >= MAX_BORROW_LIMIT) {
+    public boolean borrowBook(User user, Book book) {
+        if (user.borrowedBooks.size() >= maxBorrowLimit) {
             System.out.println("User has reached the maximum borrow limit.");
             return false;
         }
@@ -35,7 +39,7 @@ public class BookService {
     }
 
     // Return book
-    public static boolean returnBook(User user, Book book) {
+    public boolean returnBook(User user, Book book) {
         if (!user.borrowedBooks.contains(book)) {
             System.out.println("This book was not borrowed by " + user.getName() + ".");
             return false;
@@ -44,12 +48,12 @@ public class BookService {
         book.setAvailable(true);
         user.borrowedBooks.remove(book);
 
-        System.out.println(book.getTitle() + " has been returned successfully by " + user.getName());
+        System.out.println(book.getTitle()  + " has been returned successfully by " + user.getName());
         return true;
     }
 
     // Delete book from catalog
-    public static boolean deleteBook(Book book) {
+    public boolean deleteBook(Book book) {
         if (books.contains(book)) {
             books.remove(book);
             System.out.println("Book " + book.getTitle() + " has been deleted from the catalog.");
@@ -61,12 +65,12 @@ public class BookService {
     }
 
     // Get all books
-    public static List<Book> getAllBooks() {
+    public List<Book> getAllBooks() {
         return new ArrayList<>(books);
     }
 
     // Search books by title or author
-    public static List<Book> searchBooks(String query) {
+    public List<Book> searchBooks(String query) {
         List<Book> results = new ArrayList<>();
         for (Book book : books) {
             if (book.getTitle().toLowerCase().contains(query.toLowerCase()) ||
