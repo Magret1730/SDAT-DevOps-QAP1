@@ -26,6 +26,11 @@ public class BookService {
             return false;
         }
 
+        if (!books.contains(book)) {
+            System.out.println("Book not found in the catalog.");
+            return false;
+        }
+
         if (!book.isAvailable) {
             System.out.println("Book is not available for borrowing.");
             return false;
@@ -39,6 +44,11 @@ public class BookService {
 
     // Return book
     public boolean returnBook(User user, Book book) {
+        if (!books.contains(book)) {
+            System.out.println("Book not found in the catalog.");
+            return false;
+        }
+
         if (!user.borrowedBooks.contains(book)) {
             System.out.println("This book was not borrowed by " + user.getName() + ".");
             return false;
@@ -75,6 +85,8 @@ public class BookService {
             if (book.getTitle().toLowerCase().contains(query.toLowerCase()) ||
                     book.getAuthor().toLowerCase().contains(query.toLowerCase())) {
                 results.add(book);
+            } else {
+                System.out.println("No match found for book: " + query);
             }
         }
 
