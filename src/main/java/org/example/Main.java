@@ -5,9 +5,15 @@ import org.example.model.User;
 import org.example.service.BookService;
 import org.example.service.UserService;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+/**
+ * Main class to demonstrate the library management system.
+ */
 public class Main {
+    /**
+     * Main method to run the library management system demonstration.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         UserService userService = new UserService();
         BookService bookService = new BookService(2); // Max borrow limit set to 5
