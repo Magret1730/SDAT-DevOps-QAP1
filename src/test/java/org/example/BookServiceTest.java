@@ -1,10 +1,20 @@
 package org.example;
 
+import org.example.model.Book;
+import org.example.model.User;
+import org.example.service.BookService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for BookService.
+ * Includes tests for creating, borrowing, returning, deleting, retrieving, and searching books.
+ */
 public class BookServiceTest {
 
+    /**
+     * Test creating a book.
+     */
     @Test
     public void testCreateBook() {
         BookService bookService = new BookService(2);
@@ -21,6 +31,9 @@ public class BookServiceTest {
         Assertions.assertFalse(!book.isAvailable());
     }
 
+    /**
+     * Test borrowing and returning a book.
+     */
     @Test
     public void testBorrowAndReturnBook() {
         BookService bookService = new BookService(2);
@@ -64,6 +77,9 @@ public class BookServiceTest {
         Assertions.assertFalse(returnNonexistentBook);
     }
 
+    /**
+     * Test deleting a book.
+     */
     @Test
     public void testDeleteBook() {
         BookService bookService = new BookService(2);
@@ -73,6 +89,9 @@ public class BookServiceTest {
         Assertions.assertTrue(deleteResult);
     }
 
+    /**
+     * Test retrieving all books.
+     */
     @Test
     public void testGetAllBooks() {
         BookService bookService = new BookService(2);
@@ -84,6 +103,9 @@ public class BookServiceTest {
         Assertions.assertTrue(bookService.getAllBooks().contains(book2));
     }
 
+    /**
+     * Test searching for books.
+     */
     @Test
     public void testSearchBooks() {
         BookService bookService = new BookService(2);

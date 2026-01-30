@@ -1,17 +1,37 @@
-package org.example;
+package org.example.service;
+
+import org.example.model.Book;
+import org.example.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class for managing books in the library system.
+ * Includes methods for creating, borrowing, returning, deleting, and searching books.
+ * Also enforces a maximum borrow limit per user.
+ */
 public class BookService {
     private final int maxBorrowLimit;
     private final List<Book> books = new ArrayList<>();
 
+    /**
+     * Constructor to initialize BookService with a maximum borrow limit.
+     * @param maxBorrowLimit Maximum number of books a user can borrow.
+     */
     public BookService(int maxBorrowLimit) {
         this.maxBorrowLimit = maxBorrowLimit;
     }
 
-    // Create book
+    /**
+     * Create a new book and add it to the catalog.
+     *
+     * @param title Title of the book.
+     * @param author Author of the book.
+     * @param isbn ISBN of the book.
+     * isAvailable Availability status of the book.
+     * @return The created Book object.
+     */
     public Book createBook(String title, String author, String isbn) {
         Book book = new Book(title, author, isbn, true);
         books.add(book);
@@ -19,7 +39,13 @@ public class BookService {
         return  book;
     }
 
-    // Borrow book
+    /**
+     * Borrow a book for a user if within borrow limit and book is available.
+     *
+     * @param user The user borrowing the book.
+     * @param book The book to be borrowed.
+     * @return True if the book was successfully borrowed, false otherwise.
+     */
     public boolean borrowBook(User user, Book book) {
         if (user.borrowedBooks.size() >= maxBorrowLimit) {
             System.out.println("User has reached the maximum borrow limit.");
@@ -42,7 +68,13 @@ public class BookService {
         return true;
     }
 
-    // Return book
+    /**
+     * Return a borrowed book for a user.
+     *
+     * @param user The user returning the book.
+     * @param book The book to be returned.
+     * @return True if the book was successfully returned, false otherwise.
+     */
     public boolean returnBook(User user, Book book) {
         if (!books.contains(book)) {
             System.out.println("Book not found in the catalog.");
@@ -61,7 +93,12 @@ public class BookService {
         return true;
     }
 
-    // Delete book from catalog
+    /**
+     * Delete a book from the catalog.
+     *
+     * @param book The book to be deleted.
+     * @return True if the book was successfully deleted, false otherwise.
+     */
     public boolean deleteBook(Book book) {
         if (books.contains(book)) {
             books.remove(book);
@@ -73,12 +110,21 @@ public class BookService {
         }
     }
 
-    // Get all books
+    /**
+     * Get a list of all books in the catalog.
+     *
+     * @return List of all Book objects.
+     */
     public List<Book> getAllBooks() {
         return new ArrayList<>(books);
     }
 
-    // Search books by title or author
+    /**
+     * Search for books by title or author.
+     *
+     * @param query The search query (title or author).
+     * @return List of Book objects that match the search query.
+     */
     public List<Book> searchBooks(String query) {
         List<Book> results = new ArrayList<>();
         for (Book book : books) {
