@@ -44,6 +44,24 @@ public class BookServiceTest {
         bookService.borrowBook(user, book2);
         boolean borrowBeyondLimit = bookService.borrowBook(user, book3);
         Assertions.assertFalse(borrowBeyondLimit);
+
+        // Test book was not borrowed by user
+        User user2 = new User("Bob", "U002", "bob@example.com");
+        boolean returnNotBorrowedBook = bookService.returnBook(user2, book);
+        Assertions.assertFalse(returnNotBorrowedBook);
+
+        // Test deleting book not found in catalogue
+        Book bookNotInCatalog = new Book("Nonexistent Book", "Unknown Author", "0000000000", true);
+        boolean deleteNonexistentBook = bookService.deleteBook(bookNotInCatalog);
+        Assertions.assertFalse(deleteNonexistentBook);
+
+        // Test borrowing a book not in catalog
+        boolean borrowNonexistentBook = bookService.borrowBook(user, bookNotInCatalog);
+        Assertions.assertFalse(borrowNonexistentBook);
+
+        // Test returning a book not in catalog
+        boolean returnNonexistentBook = bookService.returnBook(user, bookNotInCatalog);
+        Assertions.assertFalse(returnNonexistentBook);
     }
 
     @Test
@@ -74,5 +92,8 @@ public class BookServiceTest {
 
         Assertions.assertEquals(1, bookService.searchBooks("1984").size());
         Assertions.assertEquals(1, bookService.searchBooks("F. Scott Fitzgerald").size());
+
+        // Test search with no results
+        Assertions.assertEquals(0, bookService.searchBooks("Nonexistent Title").size());
     }
 }
