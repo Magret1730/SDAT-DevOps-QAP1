@@ -13,7 +13,6 @@ public class BookService {
 
     // Create book
     public Book createBook(String title, String author, String isbn) {
-//        System.out.println("Creating book: " + title + " by " + author + " (ISBN: " + isbn + ")");
         Book book = new Book(title, author, isbn, true);
         books.add(book);
 

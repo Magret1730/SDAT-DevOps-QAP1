@@ -14,6 +14,11 @@ public class BookServiceTest {
         Assertions.assertEquals("George Orwell", book.getAuthor());
         Assertions.assertEquals("1234567890", book.getIsbn());
         Assertions.assertTrue(book.isAvailable());
+
+        Assertions.assertNotEquals("1990", book.getTitle());
+        Assertions.assertNotEquals("George Orwel", book.getAuthor());
+        Assertions.assertNotEquals("0987654321", book.getIsbn());
+        Assertions.assertFalse(!book.isAvailable());
     }
 
     @Test
